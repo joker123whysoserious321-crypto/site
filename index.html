@@ -33,6 +33,37 @@
   </script>
 
   <style>
+    /* Video background styles */
+    .hero-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .hero-video-bg video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    .hero-video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
     /* Ambient animated blob behind the pillars section */
     @keyframes floaty { 0%,100%{transform: translate3d(0,0,0) scale(1);} 50%{transform: translate3d(2%, -2%, 0) scale(1.03);} }
     .blob {
@@ -43,78 +74,86 @@
         radial-gradient(36% 36% at 30% 70%, rgba(250,204,21,0.22), transparent 60%);
       filter: blur(35px); pointer-events: none; z-index: 0; animation: floaty 16s ease-in-out infinite;
     }
-    .section-surface { background: linear-gradient(180deg, rgba(2,6,23,0.04), rgba(2,6,23,0)); }
+    .section-surface { background: linear-gradient(180deg, rgba(15,23,42,0.6), rgba(15,23,42,0.8)); }
     .safari-sticky { -webkit-backdrop-filter: saturate(120%) blur(6px); backdrop-filter: saturate(120%) blur(6px); }
     .skip-link { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
-    .skip-link:focus { left: 1rem; top: 1rem; width:auto; height:auto; padding:.5rem .75rem; background:#111827; color:white; border-radius:.5rem; z-index:50; }
+    .skip-link:focus { left: 1rem; top: 1rem; width:auto; height:auto; padding:.5rem .75rem; background:#f8fafc; color:#0f172a; border-radius:.5rem; z-index:50; }
   </style>
 </head>
-<body class="bg-white text-ink-900 antialiased">
+<body class="bg-ink-950 text-ink-50 antialiased">
   <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- Sticky Header -->
-  <header id="siteHeader" class="sticky top-0 z-50 bg-white/80 border-b border-ink-100 safari-sticky transition-[box-shadow,background-color]">
+  <header id="siteHeader" class="sticky top-0 z-50 bg-ink-950/80 border-b border-ink-800 safari-sticky transition-[box-shadow,background-color]">
     <div class="container px-4">
       <div class="flex h-14 items-center justify-between">
-        <a href="#" class="flex items-center gap-2 font-semibold tracking-tight" aria-label="Home">
-          <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-ink-900 text-white text-sm">∿</span>
+        <a href="#" class="flex items-center gap-2 font-semibold tracking-tight text-white" aria-label="Home">
+          <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-brand-600 text-white text-sm">∿</span>
           <span>Studio</span>
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm text-ink-700" aria-label="Primary">
-          <a href="#overview" class="hover:text-ink-900 navlink">Overview</a>
-          <a href="#capabilities" class="hover:text-ink-900 navlink">Capabilities</a>
-          <a href="#partners" class="hover:text-ink-900 navlink">Partners</a>
-          <a href="#gallery" class="hover:text-ink-900 navlink">Gallery</a>
-          <a href="#pricing" class="hover:text-ink-900 navlink">Pricing</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-ink-300" aria-label="Primary">
+          <a href="#overview" class="hover:text-white navlink">Overview</a>
+          <a href="#capabilities" class="hover:text-white navlink">Capabilities</a>
+          <a href="#partners" class="hover:text-white navlink">Partners</a>
+          <a href="#gallery" class="hover:text-white navlink">Gallery</a>
+          <a href="#pricing" class="hover:text-white navlink">Pricing</a>
         </nav>
         <div class="flex items-center gap-3">
-          <a href="#start" class="hidden sm:inline-flex items-center justify-center rounded-xl bg-ink-900 px-4 py-2 text-white text-sm font-medium shadow-soft">Create</a>
-          <button id="menuBtn" class="p-2 md:hidden -mr-2" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <a href="#start" class="hidden sm:inline-flex items-center justify-center rounded-xl bg-brand-600 px-4 py-2 text-white text-sm font-medium shadow-soft hover:bg-brand-700">Create</a>
+          <button id="menuBtn" class="p-2 md:hidden -mr-2 text-ink-300" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
         </div>
       </div>
     </div>
     <!-- Update banner under header -->
-    <div class="border-t border-ink-100 bg-white/80">
-      <div class="container px-4 py-2 text-center text-xs text-ink-700">
-        <span class="font-medium">Update:</span> A new release is available. <a href="#" class="underline underline-offset-2">Try it free</a>
+    <div class="border-t border-ink-800 bg-ink-950/80">
+      <div class="container px-4 py-2 text-center text-xs text-ink-300">
+        <span class="font-medium">Update:</span> A new release is available. <a href="#" class="underline underline-offset-2 hover:text-white">Try it free</a>
       </div>
     </div>
     <!-- Mobile menu -->
-    <div id="mobileMenu" class="md:hidden hidden border-t border-ink-100 bg-white" role="dialog" aria-label="Mobile">
-      <nav class="container px-4 py-3 text-sm">
-        <a href="#overview" class="block py-2">Overview</a>
-        <a href="#capabilities" class="block py-2">Capabilities</a>
-        <a href="#partners" class="block py-2">Partners</a>
-        <a href="#gallery" class="block py-2">Gallery</a>
-        <a href="#pricing" class="block py-2">Pricing</a>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-ink-800 bg-ink-950" role="dialog" aria-label="Mobile">
+      <nav class="container px-4 py-3 text-sm text-ink-300">
+        <a href="#overview" class="block py-2 hover:text-white">Overview</a>
+        <a href="#capabilities" class="block py-2 hover:text-white">Capabilities</a>
+        <a href="#partners" class="block py-2 hover:text-white">Partners</a>
+        <a href="#gallery" class="block py-2 hover:text-white">Gallery</a>
+        <a href="#pricing" class="block py-2 hover:text-white">Pricing</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
     <!-- Hero -->
-    <section id="overview" class="relative">
-      <div class="container px-4 py-16 sm:py-20">
+    <section id="overview" class="relative min-h-screen flex items-center">
+      <!-- Video Background -->
+      <div class="hero-video-bg">
+        <video autoplay muted loop playsinline>
+          <source src="/videos/1016 copy.mov" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero-video-overlay"></div>
+
+      <div class="container px-4 py-16 sm:py-20 relative z-10">
         <div class="max-w-3xl">
-          <p class="text-sm font-medium text-brand-700">Creative platform</p>
-          <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+          <p class="text-sm font-medium text-brand-400">Creative platform</p>
+          <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white">
             The next wave of visual storytelling starts here
           </h1>
-          <p class="mt-4 text-lg text-ink-600 max-w-prose">
+          <p class="mt-4 text-lg text-ink-200 max-w-prose">
             Build cinematic clips, scenes and stories with a streamlined, creator‑friendly workflow.
           </p>
           <div class="mt-8 flex items-center gap-3">
-            <a href="#start" class="inline-flex items-center justify-center rounded-xl bg-ink-900 px-5 py-3 text-white font-medium shadow-soft">Create now</a>
-            <a href="#faq" class="text-ink-700 hover:text-ink-900 underline underline-offset-2">FAQ</a>
+            <a href="#start" class="inline-flex items-center justify-center rounded-xl bg-brand-600 px-5 py-3 text-white font-medium shadow-soft hover:bg-brand-700">Create now</a>
+            <a href="#faq" class="text-ink-200 hover:text-white underline underline-offset-2">FAQ</a>
           </div>
         </div>
         <!-- Decorative visual placeholder -->
         <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div class="aspect-[16/9] rounded-2xl bg-gradient-to-br from-ink-50 to-ink-100"></div>
-          <div class="aspect-[16/9] rounded-2xl bg-gradient-to-br from-ink-50 to-ink-100"></div>
-          <div class="aspect-[16/9] rounded-2xl bg-gradient-to-br from-ink-50 to-ink-100"></div>
+          <div class="aspect-[16/9] rounded-2xl bg-gradient-to-br from-ink-800 to-ink-900 border border-ink-700"></div>
+          <div class="aspect-[16/9] rounded-2xl bg-gradient-to-br from-ink-800 to-ink-900 border border-ink-700"></div>
+          <div class="aspect-[16/9] rounded-2xl bg-gradient-to-br from-ink-800 to-ink-900 border border-ink-700"></div>
         </div>
       </div>
     </section>
@@ -124,120 +163,120 @@
       <div class="blob"></div>
       <div class="relative container px-4 py-16 sm:py-24">
         <div class="max-w-2xl">
-          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Built with and for creatives</h2>
-          <p class="mt-3 text-ink-600">Generate or bring your own assets, stitch ideas into scenes, and shape stories end‑to‑end.</p>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Built with and for creatives</h2>
+          <p class="mt-3 text-ink-300">Generate or bring your own assets, stitch ideas into scenes, and shape stories end‑to‑end.</p>
         </div>
         <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <!-- Feature card -->
-          <article class="rounded-2xl border border-ink-100 bg-white/80 p-6 shadow-soft">
-            <h3 class="font-semibold">Consistency</h3>
-            <p class="mt-2 text-ink-600">Keep characters, styles and worlds coherent across shots and scenes.</p>
+          <article class="rounded-2xl border border-ink-700 bg-ink-900/80 p-6 shadow-soft">
+            <h3 class="font-semibold text-white">Consistency</h3>
+            <p class="mt-2 text-ink-300">Keep characters, styles and worlds coherent across shots and scenes.</p>
           </article>
-          <article class="rounded-2xl border border-ink-100 bg-white/80 p-6 shadow-soft">
-            <h3 class="font-semibold">Seamless workflow</h3>
-            <p class="mt-2 text-ink-600">Move from idea to storyboard to cut with a scene‑building interface.</p>
+          <article class="rounded-2xl border border-ink-700 bg-ink-900/80 p-6 shadow-soft">
+            <h3 class="font-semibold text-white">Seamless workflow</h3>
+            <p class="mt-2 text-ink-300">Move from idea to storyboard to cut with a scene‑building interface.</p>
           </article>
-          <article class="rounded-2xl border border-ink-100 bg-white/80 p-6 shadow-soft">
-            <h3 class="font-semibold">Cinematic quality</h3>
-            <p class="mt-2 text-ink-600">High‑quality outputs with fine‑grained control over camera and motion.</p>
+          <article class="rounded-2xl border border-ink-700 bg-ink-900/80 p-6 shadow-soft">
+            <h3 class="font-semibold text-white">Cinematic quality</h3>
+            <p class="mt-2 text-ink-300">High‑quality outputs with fine‑grained control over camera and motion.</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- Partners / Logos (placeholder) -->
-    <section id="partners" class="bg-ink-50/60">
+    <section id="partners" class="bg-ink-900/60">
       <div class="container px-4 py-12 sm:py-16">
-        <p class="text-sm font-medium text-ink-600">Trusted by teams</p>
+        <p class="text-sm font-medium text-ink-300">Trusted by teams</p>
         <ul class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 grayscale">
-          <li class="h-10 bg-white rounded-md border border-ink-100"></li>
-          <li class="h-10 bg-white rounded-md border border-ink-100"></li>
-          <li class="h-10 bg-white rounded-md border border-ink-100"></li>
-          <li class="h-10 bg-white rounded-md border border-ink-100"></li>
-          <li class="h-10 bg-white rounded-md border border-ink-100"></li>
-          <li class="h-10 bg-white rounded-md border border-ink-100"></li>
+          <li class="h-10 bg-ink-800 rounded-md border border-ink-700"></li>
+          <li class="h-10 bg-ink-800 rounded-md border border-ink-700"></li>
+          <li class="h-10 bg-ink-800 rounded-md border border-ink-700"></li>
+          <li class="h-10 bg-ink-800 rounded-md border border-ink-700"></li>
+          <li class="h-10 bg-ink-800 rounded-md border border-ink-700"></li>
+          <li class="h-10 bg-ink-800 rounded-md border border-ink-700"></li>
         </ul>
       </div>
     </section>
 
     <!-- Gallery / Inspiration grid -->
-    <section id="gallery">
+    <section id="gallery" class="bg-ink-950">
       <div class="container px-4 py-16">
         <div class="flex items-end justify-between gap-6 flex-wrap">
-          <h2 class="text-2xl sm:text-3xl font-bold">See what creators are making</h2>
-          <a href="#flow-tv" class="text-sm font-medium underline underline-offset-4">Watch Showcase</a>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">See what creators are making</h2>
+          <a href="#flow-tv" class="text-sm font-medium underline underline-offset-4 text-ink-300 hover:text-white">Watch Showcase</a>
         </div>
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           <!-- 12 tiles as placeholders -->
           <!-- Repeatable card component -->
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft">
-            <div class="aspect-[16/9] bg-ink-100"></div>
-            <div class="p-4"><p class="font-medium group-hover:underline">Alt Spectrum</p><p class="text-sm text-ink-600">Creator</p></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft">
+            <div class="aspect-[16/9] bg-ink-800"></div>
+            <div class="p-4"><p class="font-medium group-hover:underline text-white">Alt Spectrum</p><p class="text-sm text-ink-400">Creator</p></div>
           </div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">Microverse</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">Window Seat</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">Ultra Wide</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">Zoo Break</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">Passengers</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">Fit Check</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">The Degenerates</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">Mobile Homes</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">Off Season Santa</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">It's All Yarn</p><p class="text-sm text-ink-600">Creator</p></div></div>
-          <div class="group overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft"><div class="aspect-[16/9] bg-ink-100"></div><div class="p-4"><p class="font-medium group-hover:underline">Mundo Queso</p><p class="text-sm text-ink-600">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">Microverse</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">Window Seat</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">Ultra Wide</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">Zoo Break</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">Passengers</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">Fit Check</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">The Degenerates</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">Mobile Homes</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">Off Season Santa</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">It's All Yarn</p><p class="text-sm text-ink-400">Creator</p></div></div>
+          <div class="group overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-soft"><div class="aspect-[16/9] bg-ink-800"></div><div class="p-4"><p class="font-medium group-hover:underline text-white">Mundo Queso</p><p class="text-sm text-ink-400">Creator</p></div></div>
         </div>
       </div>
     </section>
 
     <!-- Pricing -->
-    <section id="pricing" class="bg-ink-50">
+    <section id="pricing" class="bg-ink-900">
       <div class="container px-4 py-16 sm:py-24">
         <div class="max-w-2xl">
-          <h2 class="text-2xl sm:text-3xl font-bold">Start creating</h2>
-          <p class="mt-2 text-ink-600">Get free monthly credits. Upgrade for more power and storage.</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Start creating</h2>
+          <p class="mt-2 text-ink-300">Get free monthly credits. Upgrade for more power and storage.</p>
         </div>
         <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="rounded-2xl border border-ink-100 bg-white p-6 shadow-soft">
+          <div class="rounded-2xl border border-ink-700 bg-ink-800 p-6 shadow-soft">
             <div class="flex items-baseline gap-2">
-              <h3 class="text-xl font-semibold">Pro</h3>
-              <span class="text-sm text-ink-500">Good for most creators</span>
+              <h3 class="text-xl font-semibold text-white">Pro</h3>
+              <span class="text-sm text-ink-400">Good for most creators</span>
             </div>
-            <p class="mt-3 text-3xl font-extrabold tracking-tight">€19<span class="text-base font-normal text-ink-500">/mo</span></p>
-            <ul class="mt-4 space-y-2 text-ink-700 text-sm">
+            <p class="mt-3 text-3xl font-extrabold tracking-tight text-white">€19<span class="text-base font-normal text-ink-400">/mo</span></p>
+            <ul class="mt-4 space-y-2 text-ink-300 text-sm">
               <li>Text / frames / ingredients → video</li>
               <li>Scene builder & camera control</li>
               <li>1080p upscaling</li>
               <li>2 TB cloud storage</li>
             </ul>
-            <a href="#" class="mt-6 inline-flex rounded-xl bg-ink-900 px-5 py-3 text-white font-medium shadow-soft">Get Pro</a>
+            <a href="#" class="mt-6 inline-flex rounded-xl bg-brand-600 px-5 py-3 text-white font-medium shadow-soft hover:bg-brand-700">Get Pro</a>
           </div>
-          <div class="rounded-2xl border border-ink-100 bg-white p-6 shadow-soft">
+          <div class="rounded-2xl border border-ink-700 bg-ink-800 p-6 shadow-soft">
             <div class="flex items-baseline gap-2">
-              <h3 class="text-xl font-semibold">Ultra</h3>
-              <span class="text-sm text-ink-500">Higher limits & extras</span>
+              <h3 class="text-xl font-semibold text-white">Ultra</h3>
+              <span class="text-sm text-ink-400">Higher limits & extras</span>
             </div>
-            <p class="mt-3 text-3xl font-extrabold tracking-tight">€39<span class="text-base font-normal text-ink-500">/mo</span></p>
-            <ul class="mt-4 space-y-2 text-ink-700 text-sm">
+            <p class="mt-3 text-3xl font-extrabold tracking-tight text-white">€39<span class="text-base font-normal text-ink-400">/mo</span></p>
+            <ul class="mt-4 space-y-2 text-ink-300 text-sm">
               <li>Fast generations included</li>
               <li>Advanced model access</li>
               <li>Priority capacity</li>
               <li>30 TB cloud storage</li>
             </ul>
-            <a href="#" class="mt-6 inline-flex rounded-xl bg-ink-900 px-5 py-3 text-white font-medium shadow-soft">Get Ultra</a>
+            <a href="#" class="mt-6 inline-flex rounded-xl bg-brand-600 px-5 py-3 text-white font-medium shadow-soft hover:bg-brand-700">Get Ultra</a>
           </div>
         </div>
-        <p class="mt-4 text-sm text-ink-600">Availability varies by region. See the <a href="#faq" class="underline underline-offset-2">FAQ</a> for details.</p>
+        <p class="mt-4 text-sm text-ink-400">Availability varies by region. See the <a href="#faq" class="underline underline-offset-2 hover:text-white">FAQ</a> for details.</p>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-ink-100">
-    <div class="container px-4 py-8 text-sm text-ink-600">
+  <footer class="border-t border-ink-800 bg-ink-950">
+    <div class="container px-4 py-8 text-sm text-ink-400">
       <p>Outputs may be inaccurate or offensive. Review before sharing.</p>
       <div class="mt-2 flex gap-4">
-        <a href="#" class="underline underline-offset-2">Privacy</a>
-        <a href="#" class="underline underline-offset-2">Terms</a>
+        <a href="#" class="underline underline-offset-2 hover:text-white">Privacy</a>
+        <a href="#" class="underline underline-offset-2 hover:text-white">Terms</a>
       </div>
     </div>
   </footer>
@@ -263,8 +302,8 @@
         const link = document.querySelector(`a[href="${id}"]`);
         if (!link) return;
         if (entry.isIntersecting) {
-          links.forEach(l => l.classList.remove('text-ink-900','font-semibold'));
-          link.classList.add('text-ink-900','font-semibold');
+          links.forEach(l => l.classList.remove('text-white','font-semibold'));
+          link.classList.add('text-white','font-semibold');
         }
       })
     }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
@@ -274,7 +313,7 @@
     const onScroll = () => {
       const scrolled = window.scrollY > 4;
       header.style.boxShadow = scrolled ? 'var(--shadow, 0 6px 24px rgba(0,0,0,0.08))' : 'none';
-      if (scrolled) header.classList.add('bg-white/85'); else header.classList.remove('bg-white/85');
+      if (scrolled) header.classList.add('bg-ink-950/95'); else header.classList.remove('bg-ink-950/95');
     };
     document.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
