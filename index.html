@@ -126,12 +126,16 @@
 
   <main id="main">
     <!-- Hero -->
-    <section id="overview" class="relative min-h-screen flex items-center">
+    <section id="overview" class="relative min-h-screen flex items-center bg-ink-950">
       <!-- Video Background -->
-      <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
-        <source src="/videos/1016 copy.mov" type="video/quicktime">
-        <source src="/videos/1016 copy.mov" type="video/mp4">
-      </video>
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden;">
+        <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+          <source src="/videos/1016 copy.mov" type="video/quicktime">
+          <source src="/videos/1016 copy.mov" type="video/mp4">
+        </video>
+      </div>
+      <!-- Dark overlay for text readability -->
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 1;"></div>
 
       <div class="container px-4 py-16 sm:py-20 relative z-10">
         <div class="max-w-3xl">
